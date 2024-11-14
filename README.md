@@ -11,7 +11,21 @@ Phishing campaigns can cycle through IPs very quickly, so is there merit to bloc
 
 What about domains used in phishing or malware campaigns?
 
-A blog on the Dragos website provided a good framework for this discussion. 
+A blog on the Dragos website provided a good framework for this discussion, which I reference below. 
 
 There is o
 
+- [Dragos Blog on IOC Decay](https://www.dragos.com/blog/end-of-life-of-an-indicator-of-compromise-ioc/)
+
+## Tines Documenation
+- [Tines Resources](https://www.tines.com/docs/resources/)
+- [Tines Object Function](https://www.tines.com/docs/formulas/functions/object/)
+- [Tines MD5 Function](https://www.tines.com/docs/formulas/functions/md5/)
+- [Tines Append Function](https://www.tines.com/docs/formulas/functions/append/)
+- [Tines Append Element to Resource](https://www.tines.com/api/resources/append-element/)
+- [Tines Update a Resource](https://www.tines.com/api/resources/update/)
+- [Tines Filter Function](https://www.tines.com/docs/formulas/functions/filter/)
+- [Tines Lambda Function](https://www.tines.com/docs/formulas/functions/lambda/)
+- [Tines Community Edition](https://www.tines.com/pricing/)
+
+[Previous Blog](https://automatesecops.github.io/Working-With-Tines-Resources/)

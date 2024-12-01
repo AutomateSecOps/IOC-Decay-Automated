@@ -25,6 +25,8 @@ It depends according to the authors of the Dragos article. You need context in r
 
 With Tines, I can use their automation platform to leverage and to lifecycle IOCs in all our security solutions.
 
+Check out my [previous blog](https://automatesecops.github.io/Working-With-Tines-Resources/) where I use Tines Resources to manage and lifecycle IOCs.
+
 By using Tines, we can ingest IOCs and provide protection across our entire security infrastructure, in a timely manner.
 
 I hope you found this useful.

@@ -11,7 +11,7 @@ Phishing campaigns can cycle through IPs very quickly, so is there merit to bloc
 
 What about domains used in phishing or malware campaigns?
 
-This question came up when I started work on blocking domains in Cisco Umbrella in Tines.
+This question came up when I started work on blocking domains in Cisco Umbrella with Tines.
 
 After some research, I came across a blog on the Dragos website, which provided a good framework for assessing IOC decay and confidence.
 

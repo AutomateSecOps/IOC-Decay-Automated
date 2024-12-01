@@ -11,21 +11,43 @@ Phishing campaigns can cycle through IPs very quickly, so is there merit to bloc
 
 What about domains used in phishing or malware campaigns?
 
-A blog on the Dragos website provided a good framework for this discussion, which I reference below. 
+This question came up when I started work on blocking domains in Cisco Umbrella in Tines.
 
-There is o
+After some research, I came across a blog on the Dragos website, which provided a good framework for assessing IOC decay and confidence.
+
+How long should IOCs be blocked? 
+
+It depends according to the authors of the Dragos article. You need context in regards to maintaining IOCs on block lists. According to the authors, the following keys are used for success: 
+
+- Build a set of trusted IOC sources.
+- Use automation for when leveraging IOCs in SecOps. 
+- Deriving value from IOCs by timely deployment.
+
+With Tines, I can use their automation platform to leverage and to lifecycle IOCs in all our security solutions.
+
+By using Tines, we can ingest IOCs and provide protection across our entire security infrastructure, in a timely manner.
+
+I hope you found this useful.
+
+Once you start automating, you can't stop.
+
+Happy Building.
+
+Tom
+
+P.S.
+Before I started the automation of blocking IOCs, I took an inventory of the IOCs already in place. In the GitHub repo, I uploaded my Tines Story for collecting blocked domains in Umbrella.
+
+
 
 - [Dragos Blog on IOC Decay](https://www.dragos.com/blog/end-of-life-of-an-indicator-of-compromise-ioc/)
 
 ## Tines Documenation
 - [Tines Resources](https://www.tines.com/docs/resources/)
 - [Tines Object Function](https://www.tines.com/docs/formulas/functions/object/)
-- [Tines MD5 Function](https://www.tines.com/docs/formulas/functions/md5/)
 - [Tines Append Function](https://www.tines.com/docs/formulas/functions/append/)
 - [Tines Append Element to Resource](https://www.tines.com/api/resources/append-element/)
-- [Tines Update a Resource](https://www.tines.com/api/resources/update/)
-- [Tines Filter Function](https://www.tines.com/docs/formulas/functions/filter/)
-- [Tines Lambda Function](https://www.tines.com/docs/formulas/functions/lambda/)
+- [Tines Pagination Examples](https://www.tines.com/library/stories/91375/?name=implement-pagination-with-these-techniques)
 - [Tines Community Edition](https://www.tines.com/pricing/)
 
 [Previous Blog](https://automatesecops.github.io/Working-With-Tines-Resources/)

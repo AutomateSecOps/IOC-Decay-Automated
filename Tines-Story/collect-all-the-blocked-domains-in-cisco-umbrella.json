@@ -1,0 +1,419 @@
+{
+  "schema_version": 24,
+  "standard_lib_version": 64,
+  "action_runtime_version": 16,
+  "name": "Collect all the Blocked Domains in Cisco Umbrella",
+  "description": null,
+  "guid": "e98d71dddfc918c7f03350ee63c5b3fb",
+  "slug": "collect_all_the_blocked_domains_in_cisco_umbrella",
+  "agents": [
+    {
+      "type": "Agents::HTTPRequestAgent",
+      "name": "Get Destinations in Cisco Umbrella",
+      "disabled": false,
+      "description": "Retrieve a list of Destinations Lists using the Cisco Umbrella Management API",
+      "guid": "ba3d335f57b646e4d7e0eebd7384c70e",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:e98d71dddfc918c7f03350ee63c5b3fb",
+      "options": {
+        "url": "https://api.umbrella.com/policies/v2/destinationlists/{POLICY_NUMBER}/destinations?limit=100",
+        "method": "get",
+        "headers": {
+          "Authorization": "Bearer <<CREDENTIAL.cisco_umbrella_prod_r_destinations>>"
+        }
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": "34bbeaf88567971eb86426a7fd0c41a497ccb319f61934e3a1d23e7e041d4829",
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": [
+        {
+          "cron": "0 9 1 */1 *",
+          "timezone": "America/Vancouver"
+        }
+      ]
+    },
+    {
+      "type": "Agents::EventTransformationAgent",
+      "name": "Destinations Array",
+      "disabled": false,
+      "description": null,
+      "guid": "d9cf2999b4561310362128ee1e002baa",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:d8aa079f947e2159d27bd579e71d131d",
+      "options": {
+        "mode": "message_only",
+        "loop": false,
+        "payload": {
+          "array": "=get_destinations_in_cisco_umbrella.body.data"
+        }
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": null,
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": null
+    },
+    {
+      "type": "Agents::TriggerAgent",
+      "name": "Trigger Action",
+      "disabled": false,
+      "description": null,
+      "guid": "0be4e0560cb41c711fb03cda11e6d076",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:d8aa079f947e2159d27bd579e71d131d",
+      "options": {
+        "rules": [
+          {
+            "path": "<<get_destinations_in_cisco_umbrella.body.data>>",
+            "type": "field!=value",
+            "value": "[]"
+          }
+        ]
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": null,
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null
+    },
+    {
+      "type": "Agents::EventTransformationAgent",
+      "name": "Delay 2 Seconds",
+      "disabled": false,
+      "description": null,
+      "guid": "04ce7e41304635ce9cf7c8244c27fe89",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:d8aa079f947e2159d27bd579e71d131d",
+      "options": {
+        "mode": "delay",
+        "seconds": "2"
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": null,
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null
+    },
+    {
+      "type": "Agents::EventTransformationAgent",
+      "name": "Destinations Array",
+      "disabled": false,
+      "description": null,
+      "guid": "ff871666cbf0ed961af3a9f3fbc00bb2",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:d8aa079f947e2159d27bd579e71d131d",
+      "options": {
+        "mode": "message_only",
+        "loop": false,
+        "payload": {
+          "array": "=CONCAT(get_destinations_in_cisco_umbrella.body.data, destinations_array.array)"
+        }
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": null,
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": null
+    },
+    {
+      "type": "Agents::HTTPRequestAgent",
+      "name": "Get Destinations in Cisco Umbrella",
+      "disabled": false,
+      "description": "Retrieve a list of Destinations Lists using the Cisco Umbrella Management API",
+      "guid": "9ce7c707ae793af9ca87969a3ce1220e",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:e98d71dddfc918c7f03350ee63c5b3fb",
+      "options": {
+        "url": "https://api.umbrella.com/policies/v2/destinationlists/2086990/destinations?page=<<increment_counter.counter + 1>>&limit=100",
+        "method": "get",
+        "headers": {
+          "Authorization": "Bearer <<CREDENTIAL.cisco_umbrella_prod_r_destinations>>"
+        }
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": "34bbeaf88567971eb86426a7fd0c41a497ccb319f61934e3a1d23e7e041d4829",
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": null
+    },
+    {
+      "type": "Agents::EventTransformationAgent",
+      "name": "Increment Counter",
+      "disabled": false,
+      "description": "",
+      "guid": "9192f2d5c713453122b7e5b55e97a953",
+      "origin_story_identifier": "cloud:d521f765a49c72507257a2620612ee96:b6ba9a48c4bda40bb9dfa52b14d9490a",
+      "options": {
+        "mode": "message_only",
+        "payload": {
+          "counter": "<<PLUS(increment_counter.counter, 1)>>"
+        }
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": null,
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": null
+    },
+    {
+      "type": "Agents::EventTransformationAgent",
+      "name": "Destination Lists to CSV",
+      "disabled": false,
+      "description": null,
+      "guid": "d47b97c2579ce1daa94914ca63682108",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:ee914734332d735c823004fffcccecdd",
+      "options": {
+        "mode": "message_only",
+        "loop": false,
+        "payload": {
+          "message": "<<OBJECTS_TO_CSV(destinations_array.array)>>"
+        }
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": null,
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": null
+    },
+    {
+      "type": "Agents::EmailAgent",
+      "name": "Send Email Action",
+      "disabled": false,
+      "description": null,
+      "guid": "194b00f1b70bf273037f2ea209725788",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:ee914734332d735c823004fffcccecdd",
+      "options": {
+        "recipients": [
+          "secops@mycompany.com"
+        ],
+        "reply_to": "secops@mycompany.com",
+        "sender_name": "Tines Cisco Umbrella Workflow",
+        "subject": "Cisco Umbrella - Destinations on Global Block List",
+        "body": "Attached is the list of Blocked Domains.\nThe Number of Blocked Domains:<<get_destinations_in_cisco_umbrella.body.meta.total>>",
+        "advanced_html": true,
+        "attachments": [
+          {
+            "filename": "Destination_List_block.csv",
+            "base64encodedcontents": "<<BASE64_ENCODE(destination_lists_to_csv.message)>>",
+            "content_type": "auto"
+          }
+        ]
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": null,
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": null
+    },
+    {
+      "type": "Agents::HTTPRequestAgent",
+      "name": "Get Destination Lists in Umbrella",
+      "disabled": false,
+      "description": "Retrieve a list of Destinations Lists using the Cisco Umbrella Management API",
+      "guid": "ff3f2bf420656ec017433a1432eac372",
+      "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:e98d71dddfc918c7f03350ee63c5b3fb",
+      "options": {
+        "url": "https://api.umbrella.com/policies/v2/destinationlists",
+        "method": "get",
+        "headers": {
+          "Authorization": "Bearer <<CREDENTIAL.cisco_umbrella_prod_r_destinations>>"
+        }
+      },
+      "reporting": {
+        "time_saved_value": 0,
+        "time_saved_unit": "minutes"
+      },
+      "monitoring": {
+        "monitor_all_events": false,
+        "monitor_failures": false,
+        "monitor_no_events_emitted": null
+      },
+      "template": {
+        "created_from_template_guid": "34bbeaf88567971eb86426a7fd0c41a497ccb319f61934e3a1d23e7e041d4829",
+        "created_from_template_version": null,
+        "template_tags": []
+      },
+      "width": null,
+      "schedule": null
+    }
+  ],
+  "diagram_notes": [
+    {
+      "content": "Workflow for obtaining the Blocked Destinations on the Umbrella Block List\n1. Run the Get Destination Lists in Umbrella Action to determine the Policy Number for the Global Block List.\n2. Use the Policy Number in the Get Destinations in Cisco Umbrella HTTP Request.\n3. Requirement: Cisco Umbrella API scoped for read only under Policies>Destination Lists",
+      "position": [
+        1170,
+        -420
+      ],
+      "guid": "467d099716ad4771f6410bda7fd1ec0e",
+      "width": 270
+    },
+    {
+      "content": "https://cdn.umbrella.marketops.umbrella.com/wp-content/uploads/2020/02/25170610/SIG-vision-illustration%402x-1024x818.png",
+      "position": [
+        855,
+        -555
+      ],
+      "guid": "21615536c422fa0cdbe39d762f4e66a8",
+      "width": 270
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "receiver": 1
+    },
+    {
+      "source": 1,
+      "receiver": 2
+    },
+    {
+      "source": 2,
+      "receiver": 6
+    },
+    {
+      "source": 2,
+      "receiver": 7,
+      "link_type": "secondary"
+    },
+    {
+      "source": 3,
+      "receiver": 5
+    },
+    {
+      "source": 4,
+      "receiver": 2
+    },
+    {
+      "source": 5,
+      "receiver": 4
+    },
+    {
+      "source": 6,
+      "receiver": 3
+    },
+    {
+      "source": 7,
+      "receiver": 8
+    }
+  ],
+  "diagram_layout": "{\"ba3d335f57b646e4d7e0eebd7384c70e\":[885,-240],\"d9cf2999b4561310362128ee1e002baa\":[885,-150],\"0be4e0560cb41c711fb03cda11e6d076\":[885,-60],\"04ce7e41304635ce9cf7c8244c27fe89\":[885,90],\"ff871666cbf0ed961af3a9f3fbc00bb2\":[885,255],\"9ce7c707ae793af9ca87969a3ce1220e\":[885,165],\"9192f2d5c713453122b7e5b55e97a953\":[885,15],\"d47b97c2579ce1daa94914ca63682108\":[1200,60],\"194b00f1b70bf273037f2ea209725788\":[1200,135],\"ff3f2bf420656ec017433a1432eac372\":[1200,-90]}",
+  "send_to_story_enabled": false,
+  "entry_agent_guid": null,
+  "exit_agent_guids": [],
+  "exit_agent_guid": null,
+  "api_entry_action_guids": [],
+  "api_exit_action_guids": [],
+  "keep_events_for": 604800,
+  "reporting_status": true,
+  "send_to_story_access": null,
+  "story_library_metadata": {},
+  "parent_only_send_to_story": false,
+  "monitor_failures": false,
+  "send_to_stories": [],
+  "synchronous_webhooks_enabled": false,
+  "send_to_story_access_source": 0,
+  "send_to_story_skill_use_requires_confirmation": true,
+  "pages": [],
+  "tags": [],
+  "time_saved_unit": "minutes",
+  "time_saved_value": 0,
+  "origin_story_identifier": "cloud:256caef50de818d681816208610a2c92:e98d71dddfc918c7f03350ee63c5b3fb",
+  "integration_product": null,
+  "integration_vendor": null,
+  "llm_product_instructions": "",
+  "exported_at": "2024-12-01T20:42:09Z",
+  "icon": ":bar_chart:",
+  "integrations": []
+}

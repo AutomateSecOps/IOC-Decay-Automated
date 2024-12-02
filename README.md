@@ -27,7 +27,7 @@ With Tines, I can use their automation platform to leverage and to lifecycle IOC
 
 Check out my [previous blog](https://automatesecops.github.io/Working-With-Tines-Resources/) where I use Tines Resources to manage and lifecycle IOCs.
 
-By using Tines, we can ingest IOCs and provide protection across our entire security infrastructure, in a timely manner.
+Tines can ingest IOCs and provide protection across our entire security infrastructure, in a timely manner.
 
 I hope you found this useful.
 
